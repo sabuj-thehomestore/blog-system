@@ -133,7 +133,7 @@ const seedDatabase = async () => {
       }
     ]);
 
-    console.log('✅ Database successfully seeded!');
+    console.log('[Seed] Database successfully seeded!');
     console.log('--------------------------------------------------');
     console.log('Demo Credentials:');
     console.log('  Admin User:   admin@blog.com    / AdminPass123!');
@@ -144,7 +144,7 @@ const seedDatabase = async () => {
     await mongoose.disconnect();
     process.exit(0);
   } catch (err) {
-    console.error('❌ Seeding failed:', err);
+    console.error('[Seed] Seeding failed:', err);
     process.exit(1);
   }
 };

@@ -39,9 +39,9 @@ const startServer = async () => {
   try {
     await connectDB();
     server.listen(PORT, () => {
-      console.log(`🚀 Blog System API Server running on port ${PORT}`);
-      console.log(`📡 WebSocket server initialized`);
-      console.log(`🌐 Base URL: http://localhost:${PORT}/api/v1`);
+      console.log(`[Server] Blog System API running on port ${PORT}`);
+      console.log(`[WebSocket] WebSocket server initialized`);
+      console.log(`[API] Base URL: http://localhost:${PORT}/api/v1`);
     });
   } catch (error) {
     console.error('Failed to start server:', error.message);

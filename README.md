@@ -4,7 +4,7 @@ A production-grade, full-stack blog application built with the **MERN** stack (M
 
 ---
 
-## 🌟 Key Highlights & Architecture
+## Key Highlights & Architecture
 
 The backend strictly adheres to the **Controller — Service — Repository** pattern:
 
@@ -57,7 +57,7 @@ Request ──► Routes ──► Middlewares (Auth, RBAC, RateLimiter, Validat
 
 ---
 
-## 📁 Project Directory Layout
+## Project Directory Layout
 
 ```
 blogsystem/
@@ -98,7 +98,38 @@ blogsystem/
 
 ---
 
-## 🚀 Quick Start Guide
+## Docker Deployment (Full Stack)
+
+The application includes complete containerization for MongoDB, backend API, and React frontend with Nginx.
+
+### Run with Docker Compose (Single Command)
+
+```bash
+docker compose up --build -d
+```
+
+Services started:
+- **Frontend (Nginx + React SPA)**: http://localhost:5173
+- **Backend API (Node.js + Express + WebSockets)**: http://localhost:5000/api/v1
+- **Database (MongoDB 7.0)**: localhost:27017
+
+### Seed Database in Docker
+
+Once the containers are up, seed demo users and posts into MongoDB:
+
+```bash
+docker compose exec backend npm run seed
+```
+
+### Stop Docker Containers
+
+```bash
+docker compose down
+```
+
+---
+
+## Quick Start Guide (Local Development)
 
 ### Prerequisites
 - **Node.js** (v18.x or v20.x or v24.x)
@@ -199,7 +230,7 @@ Open `http://localhost:5173` in your browser.
 
 ---
 
-## 🧪 Running the Automated Test Suite
+## Running the Automated Test Suite
 
 The backend includes comprehensive **Jest** unit and integration tests covering:
 - **RBAC Middleware**: Role verification, permission escalation guards.
@@ -226,7 +257,7 @@ Tests:       21 passed, 21 total
 
 ---
 
-## 📖 API Documentation Overview
+## API Documentation Overview
 
 All responses use a standardized JSON envelope:
 ```json
@@ -282,7 +313,7 @@ All responses use a standardized JSON envelope:
 
 ---
 
-## 🎥 5–10 Minute Demo Video Walkthrough Guide
+## 5-10 Minute Demo Video Walkthrough Guide
 
 When recording the demo showcase:
 
