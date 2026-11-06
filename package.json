@@ -1,0 +1,12 @@
+{
+  "name": "blogsystem-root",
+  "version": "1.0.0",
+  "description": "Full Stack MERN Blog System with Clean Architecture (Controller-Service-Repository)",
+  "scripts": {
+    "server": "npm --prefix server run dev",
+    "client": "npm --prefix client run dev",
+    "seed": "npm --prefix server run seed",
+    "test": "npm --prefix server test",
+    "build": "npm --prefix client run build"
+  }
+}
