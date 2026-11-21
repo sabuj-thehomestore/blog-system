@@ -313,29 +313,3 @@ All responses use a standardized JSON envelope:
 | `GET` | `/logs` | Immutable activity audit trail | Admin Only |
 
 ---
-
-## 5-10 Minute Demo Video Walkthrough Guide
-
-When recording the demo showcase:
-
-1. **Architecture & Project Tour (1-2 mins)**:
-   - Walk through the folder structure highlighting the `controllers/`, `services/`, and `repositories/` separation.
-   - Run `npm test` inside `server/` showing all 21 unit/integration test suites passing.
-2. **User Experience & Public Features (2-3 mins)**:
-   - Open homepage: demonstrate search filtering, tag clicking, pagination.
-   - Open an article detail page: view markdown content, author details, and comments.
-3. **Authentication & RBAC (2 mins)**:
-   - Click "Sign In" and use the **User Demo** fast-fill button (`john@example.com`).
-   - Create a new article with title, tags, and content.
-   - Add a comment to another post.
-   - Show that regular users can only edit/delete their own articles in "My Articles".
-4. **Admin Panel Showcase (2-3 mins)**:
-   - Switch accounts using the **Admin Demo** fast-fill button (`admin@blog.com`).
-   - Navigate to `/admin`:
-     - **Dashboard Overview**: view live counts for Total Users, Total Posts, and Comments.
-     - **User Management**: toggle user status (deactivate) or switch a user to admin.
-     - **Post Moderation**: show soft-deleted articles and click **Restore** to bring them back to the public feed.
-     - **Activity Audit Logs**: show the live audit trail tracking logins, post updates, and status changes.
-5. **Real-time Notifications (Bonus)**:
-   - Open two browser tabs (one logged in as post author John, one as Jane).
-   - Post a comment as Jane; show the instant real-time notification indicator appearing in John's navigation bar via Socket.io.
