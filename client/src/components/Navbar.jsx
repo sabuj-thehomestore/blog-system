@@ -36,7 +36,7 @@ export const Navbar = () => {
             </div>
             <div>
               <span className="font-extrabold text-xl tracking-tight text-slate-900">
-                Antigravity<span className="text-emerald-600">Blog</span>
+                DEV<span className="text-emerald-600">Blog</span>
               </span>
               <span className="block text-[10px] uppercase font-bold text-slate-600 tracking-wider -mt-1">
                 MERN Platform

@@ -69,6 +69,33 @@ describe('Service Layer Business Logic Tests', () => {
       const result = await postService.softDeletePost('post1', adminUser);
       expect(result.isDeleted).toBe(true);
     });
+
+    test('getPostById - returns post when found and not deleted', async () => {
+      const mockPost = {
+        _id: 'post1',
+        title: 'Active Post',
+        isDeleted: false
+      };
+
+      const { postRepository } = await import('../src/repositories/post.repository.js');
+      jest.spyOn(postRepository, 'findById').mockResolvedValue(mockPost);
+
+      const result = await postService.getPostById('post1');
+      expect(result).toEqual(mockPost);
+    });
+
+    test('getPostById - throws 404 when post is soft-deleted', async () => {
+      const mockPost = {
+        _id: 'post1',
+        title: 'Deleted Post',
+        isDeleted: true
+      };
+
+      const { postRepository } = await import('../src/repositories/post.repository.js');
+      jest.spyOn(postRepository, 'findById').mockResolvedValue(mockPost);
+
+      await expect(postService.getPostById('post1')).rejects.toThrow('Post not found');
+    });
   });
 
   describe('AdminService', () => {

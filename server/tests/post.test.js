@@ -53,15 +53,15 @@ describe('Post Management & RBAC Permissions', () => {
       .post('/api/v1/posts')
       .set('Authorization', `Bearer ${userToken}`)
       .send({
-        title: 'First Test Post on Antigravity',
+        title: 'First Test Post on Dv',
         content: 'This is the body content of our test post that has more than 10 characters.',
-        tags: ['tech', 'antigravity']
+        tags: ['tech', 'Dev']
       });
 
     expect(res.status).toBe(201);
     expect(res.body.success).toBe(true);
     expect(res.body.data).toHaveProperty('slug');
-    expect(res.body.data.slug).toContain('first-test-post-on-antigravity');
+    expect(res.body.data.slug).toContain('first-test-post-on-dev');
     expect(res.body.data.isDeleted).toBe(false);
   });
 
@@ -78,6 +78,23 @@ describe('Post Management & RBAC Permissions', () => {
     expect(res.status).toBe(200);
     expect(res.body.data.length).toBe(1);
     expect(res.body.meta.totalItems).toBe(1);
+  });
+
+  test('GET /api/v1/posts/:id - retrieves a post by id for editing', async () => {
+    const createRes = await request(app)
+      .post('/api/v1/posts')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        title: 'Editable Post',
+        content: 'Testing single post retrieval by ID for editing.'
+      });
+
+    const postId = createRes.body.data._id;
+
+    const res = await request(app).get(`/api/v1/posts/${postId}`);
+    expect(res.status).toBe(200);
+    expect(res.body.data._id).toBe(postId);
+    expect(res.body.data.title).toBe('Editable Post');
   });
 
   test('PUT /api/v1/posts/:id - author can update their own post', async () => {

@@ -3,6 +3,7 @@ import {
   createPost,
   getPosts,
   getPostBySlug,
+  getPostById,
   updatePost,
   deletePost,
   restorePost,
@@ -32,6 +33,7 @@ router.post(
 );
 
 router.get('/user/my-posts', verifyJWT, getMyPosts);
+router.get('/:id', getPostById);
 
 router.put(
   '/:id',

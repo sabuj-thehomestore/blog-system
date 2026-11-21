@@ -293,7 +293,7 @@ export const PostDetail = () => {
             {comments.map((comment) => {
               const commentAuthorId = comment.author?._id || comment.author;
               const isCommentAuthor = user && user.id === commentAuthorId;
-              const canDeleteComment = isCommentAuthor || isAdmin;
+              const canManageComment = isCommentAuthor || isAdmin;
 
               return (
                 <div
@@ -325,7 +325,7 @@ export const PostDetail = () => {
 
                     {/* Action buttons */}
                     <div className="flex items-center gap-1">
-                      {isCommentAuthor && editingCommentId !== comment._id && (
+                      {canManageComment && editingCommentId !== comment._id && (
                         <button
                           onClick={() => {
                             setEditingCommentId(comment._id);
@@ -337,7 +337,7 @@ export const PostDetail = () => {
                           <Edit3 className="h-3.5 w-3.5" />
                         </button>
                       )}
-                      {canDeleteComment && (
+                      {canManageComment && (
                         <button
                           onClick={() => handleDeleteComment(comment._id)}
                           className="text-slate-600 hover:text-red-600 p-1 text-xs"

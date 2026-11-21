@@ -56,7 +56,13 @@ router.get(
 // OAuth - Google
 router.get(
   '/google',
-  passport.authenticate('google', { scope: ['profile', 'email'], session: false })
+  (req, res, next) => {
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+      const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+      return res.redirect(`${clientUrl}/login?error=google_oauth_not_configured`);
+    }
+    return passport.authenticate('google', { scope: ['profile', 'email'], session: false })(req, res, next);
+  }
 );
 
 router.get(
@@ -69,7 +75,13 @@ router.get(
 // OAuth - Facebook
 router.get(
   '/facebook',
-  passport.authenticate('facebook', { scope: ['email'], session: false })
+  (req, res, next) => {
+    if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
+      const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+      return res.redirect(`${clientUrl}/login?error=facebook_oauth_not_configured`);
+    }
+    return passport.authenticate('facebook', { scope: ['email'], session: false })(req, res, next);
+  }
 );
 
 router.get(

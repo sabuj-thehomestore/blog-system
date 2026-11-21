@@ -5,6 +5,7 @@ import { HTTP_STATUS } from '../constants/index.js';
 export const createPost = async (req, res, next) => {
   try {
     const post = await postService.createPost(req.user.id, req.body);
+    res.locals.postId = post._id;
     res.status(HTTP_STATUS.CREATED).json(
       new ApiResponse(HTTP_STATUS.CREATED, post, 'Post created successfully')
     );
@@ -39,6 +40,17 @@ export const getPosts = async (req, res, next) => {
 export const getPostBySlug = async (req, res, next) => {
   try {
     const post = await postService.getPostBySlug(req.params.slug);
+    res.status(HTTP_STATUS.OK).json(
+      new ApiResponse(HTTP_STATUS.OK, post, 'Post retrieved successfully')
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getPostById = async (req, res, next) => {
+  try {
+    const post = await postService.getPostById(req.params.id);
     res.status(HTTP_STATUS.OK).json(
       new ApiResponse(HTTP_STATUS.OK, post, 'Post retrieved successfully')
     );

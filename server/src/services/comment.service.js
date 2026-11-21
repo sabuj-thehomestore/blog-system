@@ -49,8 +49,8 @@ export class CommentService {
       throw new ApiError(HTTP_STATUS.NOT_FOUND, 'Comment not found');
     }
 
-    // Only comment author can edit comment content
-    if (comment.author.toString() !== user.id) {
+    // Comment author or Admin can edit comment content
+    if (user.role !== ROLES.ADMIN && comment.author.toString() !== user.id) {
       throw new ApiError(HTTP_STATUS.FORBIDDEN, 'You can only edit your own comment');
     }
 

@@ -27,7 +27,9 @@ export const MyPosts = () => {
     if (!window.confirm('Are you sure you want to delete this post?')) return;
     try {
       await api.delete(`/posts/${postId}`);
-      setPosts((prev) => prev.filter((p) => p._id !== postId));
+      setPosts((prev) =>
+        prev.map((p) => (p._id === postId ? { ...p, isDeleted: true } : p))
+      );
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete post');
     }
@@ -105,15 +107,15 @@ export const MyPosts = () => {
                     </td>
                     <td className="py-4 px-6 text-right">
                       <div className="inline-flex items-center gap-2">
-                        <Link
-                          to={`/post/${post.slug}`}
-                          className="p-1.5 text-slate-600 hover:text-emerald-600 rounded-lg hover:bg-slate-100 transition"
-                          title="View"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                        </Link>
                         {!post.isDeleted && (
                           <>
+                            <Link
+                              to={`/post/${post.slug}`}
+                              className="p-1.5 text-slate-600 hover:text-emerald-600 rounded-lg hover:bg-slate-100 transition"
+                              title="View"
+                            >
+                              <ExternalLink className="h-4 w-4" />
+                            </Link>
                             <Link
                               to={`/edit-post/${post._id}`}
                               className="p-1.5 text-slate-600 hover:text-blue-600 rounded-lg hover:bg-slate-100 transition"

@@ -286,6 +286,7 @@ All responses use a standardized JSON envelope:
 |---|---|---|---|
 | `GET` | `/` | Paginated post feed (`?page=&limit=&search=&tag=`) | Public |
 | `GET` | `/slug/:slug` | Fetch post details & author by slug | Public |
+| `GET` | `/:id` | Fetch single post by ID (used for editing) | Public |
 | `POST` | `/` | Create article (auto slug generation) | Authenticated |
 | `GET` | `/user/my-posts` | List authenticated user's articles | Authenticated |
 | `PUT` | `/:id` | Update article | Author or Admin |

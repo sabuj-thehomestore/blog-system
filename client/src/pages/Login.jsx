@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, AlertCircle, ArrowRight, ShieldCheck, User } from 'lucide-react';
 
 export const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const { login } = useAuth();
 
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -13,6 +14,17 @@ export const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const from = location.state?.from?.pathname || '/';
+
+  useEffect(() => {
+    const oauthError = searchParams.get('error');
+    if (oauthError === 'google_oauth_not_configured') {
+      setError('Google OAuth is not configured yet. Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in server/.env.');
+    } else if (oauthError === 'facebook_oauth_not_configured') {
+      setError('Facebook OAuth is not configured yet. Set FACEBOOK_APP_ID and FACEBOOK_APP_SECRET in server/.env.');
+    } else if (oauthError) {
+      setError('OAuth authentication failed. Please try again or sign in with email and password.');
+    }
+  }, [searchParams]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));

@@ -7,7 +7,7 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <BookOpen className="h-4 w-4 text-emerald-600" />
-          <span className="font-bold text-slate-800">Antigravity MERN Blog System</span>
+          <span className="font-bold text-slate-800">Dev MERN Blog System</span>
         </div>
         <p className="text-xs text-slate-600">
           Built with React 18, Vite, Tailwind CSS, Node.js, Express, and MongoDB.
